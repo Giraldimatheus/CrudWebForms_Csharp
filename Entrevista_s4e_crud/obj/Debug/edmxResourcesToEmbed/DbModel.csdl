@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WinformDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblEmpresa">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CNPJ" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tblPessoaEmpresa" Relationship="WinformDBModel.FK__tblPessoa__tblEm__44FF419A" FromRole="tblEmpresa" ToRole="tblPessoaEmpresa" />
+  </EntityType>
+  <EntityContainer Name="WinformDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblEmpresa" EntityType="Self.tblEmpresa" />
+    <EntitySet Name="tblPessoa" EntityType="WinformDBModel.tblPessoa" />
+    <EntitySet Name="tblPessoaEmpresa" EntityType="WinformDBModel.tblPessoaEmpresa" />
+    <AssociationSet Name="FK__tblPessoa__tblEm__44FF419A" Association="WinformDBModel.FK__tblPessoa__tblEm__44FF419A">
+      <End Role="tblEmpresa" EntitySet="tblEmpresa" />
+      <End Role="tblPessoaEmpresa" EntitySet="tblPessoaEmpresa" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblPessoa__tblPe__440B1D61" Association="WinformDBModel.FK__tblPessoa__tblPe__440B1D61">
+      <End Role="tblPessoa" EntitySet="tblPessoa" />
+      <End Role="tblPessoaEmpresa" EntitySet="tblPessoaEmpresa" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="tblPessoa">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Cpf" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="DataNascimento" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="tblPessoaEmpresa" Relationship="WinformDBModel.FK__tblPessoa__tblPe__440B1D61" FromRole="tblPessoa" ToRole="tblPessoaEmpresa" />
+  </EntityType>
+  <EntityType Name="tblPessoaEmpresa">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tblPessoa_id" Type="Int32" />
+    <Property Name="tblEmpresa_id" Type="Int32" />
+    <NavigationProperty Name="tblEmpresa" Relationship="WinformDBModel.FK__tblPessoa__tblEm__44FF419A" FromRole="tblPessoaEmpresa" ToRole="tblEmpresa" />
+    <NavigationProperty Name="tblPessoa" Relationship="WinformDBModel.FK__tblPessoa__tblPe__440B1D61" FromRole="tblPessoaEmpresa" ToRole="tblPessoa" />
+  </EntityType>
+  <Association Name="FK__tblPessoa__tblEm__44FF419A">
+    <End Type="WinformDBModel.tblEmpresa" Role="tblEmpresa" Multiplicity="0..1" />
+    <End Type="WinformDBModel.tblPessoaEmpresa" Role="tblPessoaEmpresa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEmpresa">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblPessoaEmpresa">
+        <PropertyRef Name="tblEmpresa_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblPessoa__tblPe__440B1D61">
+    <End Type="WinformDBModel.tblPessoa" Role="tblPessoa" Multiplicity="0..1" />
+    <End Type="WinformDBModel.tblPessoaEmpresa" Role="tblPessoaEmpresa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblPessoa">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblPessoaEmpresa">
+        <PropertyRef Name="tblPessoa_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

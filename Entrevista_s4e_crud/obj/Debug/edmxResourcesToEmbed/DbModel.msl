@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="WinformDBModelStoreContainer" CdmEntityContainer="WinformDBEntities">
+    <EntitySetMapping Name="tblEmpresa">
+      <EntityTypeMapping TypeName="WinformDBModel.tblEmpresa">
+        <MappingFragment StoreEntitySet="tblEmpresa">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="CNPJ" ColumnName="CNPJ" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblPessoa">
+      <EntityTypeMapping TypeName="WinformDBModel.tblPessoa">
+        <MappingFragment StoreEntitySet="tblPessoa">
+          <ScalarProperty Name="DataNascimento" ColumnName="DataNascimento" />
+          <ScalarProperty Name="Cpf" ColumnName="Cpf" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblPessoaEmpresa">
+      <EntityTypeMapping TypeName="WinformDBModel.tblPessoaEmpresa">
+        <MappingFragment StoreEntitySet="tblPessoaEmpresa">
+          <ScalarProperty Name="tblEmpresa_id" ColumnName="tblEmpresa_id" />
+          <ScalarProperty Name="tblPessoa_id" ColumnName="tblPessoa_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

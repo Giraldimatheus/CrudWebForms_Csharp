@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WinformDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblEmpresa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="CNPJ" Type="varchar" MaxLength="14" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblPessoa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Cpf" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="DataNascimento" Type="date" />
+        </EntityType>
+        <EntityType Name="tblPessoaEmpresa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tblPessoa_id" Type="int" />
+          <Property Name="tblEmpresa_id" Type="int" />
+        </EntityType>
+        <Association Name="FK__tblPessoa__tblEm__44FF419A">
+          <End Role="tblEmpresa" Type="Self.tblEmpresa" Multiplicity="0..1" />
+          <End Role="tblPessoaEmpresa" Type="Self.tblPessoaEmpresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmpresa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblPessoaEmpresa">
+              <PropertyRef Name="tblEmpresa_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblPessoa__tblPe__440B1D61">
+          <End Role="tblPessoa" Type="Self.tblPessoa" Multiplicity="0..1" />
+          <End Role="tblPessoaEmpresa" Type="Self.tblPessoaEmpresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPessoa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblPessoaEmpresa">
+              <PropertyRef Name="tblPessoa_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WinformDBModelStoreContainer">
+          <EntitySet Name="tblEmpresa" EntityType="Self.tblEmpresa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPessoa" EntityType="Self.tblPessoa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPessoaEmpresa" EntityType="Self.tblPessoaEmpresa" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tblPessoa__tblEm__44FF419A" Association="Self.FK__tblPessoa__tblEm__44FF419A">
+            <End Role="tblEmpresa" EntitySet="tblEmpresa" />
+            <End Role="tblPessoaEmpresa" EntitySet="tblPessoaEmpresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblPessoa__tblPe__440B1D61" Association="Self.FK__tblPessoa__tblPe__440B1D61">
+            <End Role="tblPessoa" EntitySet="tblPessoa" />
+            <End Role="tblPessoaEmpresa" EntitySet="tblPessoaEmpresa" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WinformDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblEmpresa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CNPJ" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblPessoaEmpresa" Relationship="WinformDBModel.FK__tblPessoa__tblEm__44FF419A" FromRole="tblEmpresa" ToRole="tblPessoaEmpresa" />
+        </EntityType>
+        <EntityContainer Name="WinformDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblEmpresa" EntityType="Self.tblEmpresa" />
+          <EntitySet Name="tblPessoa" EntityType="WinformDBModel.tblPessoa" />
+          <EntitySet Name="tblPessoaEmpresa" EntityType="WinformDBModel.tblPessoaEmpresa" />
+          <AssociationSet Name="FK__tblPessoa__tblEm__44FF419A" Association="WinformDBModel.FK__tblPessoa__tblEm__44FF419A">
+            <End Role="tblEmpresa" EntitySet="tblEmpresa" />
+            <End Role="tblPessoaEmpresa" EntitySet="tblPessoaEmpresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblPessoa__tblPe__440B1D61" Association="WinformDBModel.FK__tblPessoa__tblPe__440B1D61">
+            <End Role="tblPessoa" EntitySet="tblPessoa" />
+            <End Role="tblPessoaEmpresa" EntitySet="tblPessoaEmpresa" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="tblPessoa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Cpf" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="DataNascimento" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="tblPessoaEmpresa" Relationship="WinformDBModel.FK__tblPessoa__tblPe__440B1D61" FromRole="tblPessoa" ToRole="tblPessoaEmpresa" />
+        </EntityType>
+        <EntityType Name="tblPessoaEmpresa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tblPessoa_id" Type="Int32" />
+          <Property Name="tblEmpresa_id" Type="Int32" />
+          <NavigationProperty Name="tblEmpresa" Relationship="WinformDBModel.FK__tblPessoa__tblEm__44FF419A" FromRole="tblPessoaEmpresa" ToRole="tblEmpresa" />
+          <NavigationProperty Name="tblPessoa" Relationship="WinformDBModel.FK__tblPessoa__tblPe__440B1D61" FromRole="tblPessoaEmpresa" ToRole="tblPessoa" />
+        </EntityType>
+        <Association Name="FK__tblPessoa__tblEm__44FF419A">
+          <End Type="WinformDBModel.tblEmpresa" Role="tblEmpresa" Multiplicity="0..1" />
+          <End Type="WinformDBModel.tblPessoaEmpresa" Role="tblPessoaEmpresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmpresa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblPessoaEmpresa">
+              <PropertyRef Name="tblEmpresa_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblPessoa__tblPe__440B1D61">
+          <End Type="WinformDBModel.tblPessoa" Role="tblPessoa" Multiplicity="0..1" />
+          <End Type="WinformDBModel.tblPessoaEmpresa" Role="tblPessoaEmpresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPessoa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblPessoaEmpresa">
+              <PropertyRef Name="tblPessoa_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WinformDBModelStoreContainer" CdmEntityContainer="WinformDBEntities">
+          <EntitySetMapping Name="tblEmpresa">
+            <EntityTypeMapping TypeName="WinformDBModel.tblEmpresa">
+              <MappingFragment StoreEntitySet="tblEmpresa">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="CNPJ" ColumnName="CNPJ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPessoa">
+            <EntityTypeMapping TypeName="WinformDBModel.tblPessoa">
+              <MappingFragment StoreEntitySet="tblPessoa">
+                <ScalarProperty Name="DataNascimento" ColumnName="DataNascimento" />
+                <ScalarProperty Name="Cpf" ColumnName="Cpf" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPessoaEmpresa">
+            <EntityTypeMapping TypeName="WinformDBModel.tblPessoaEmpresa">
+              <MappingFragment StoreEntitySet="tblPessoaEmpresa">
+                <ScalarProperty Name="tblEmpresa_id" ColumnName="tblEmpresa_id" />
+                <ScalarProperty Name="tblPessoa_id" ColumnName="tblPessoa_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
